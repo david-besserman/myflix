@@ -1,0 +1,20 @@
+require 'spec_helper'
+
+describe Video do
+  it "saves itself" do
+    video = Video.new(title: 'some series', small_cover_url: 'some_url', large_cover_url: 'another_url', description: 'some description')
+    video.save
+    expect(Video.first).to eq(video)
+  end
+
+  it "belongs to category"
+    v = Video.new(title: 'some title')
+    cat = Category.new(name: 'some category')
+
+    cat.save
+    v.save
+
+    v.category << cat
+
+    expect(v.category).to eq(cat)
+end
