@@ -15,4 +15,9 @@ Myflix::Application.routes.draw do
       post :search, to: 'videos#search'
     end
   end
+
+
+
+
+  get 'haml_test', to: 'pages#haml_test'
 end
