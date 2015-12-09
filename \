@@ -1,0 +1,14 @@
+class ReviewsController < ApplicationController
+  def create
+    binding.pry
+    video = Video.find(params[:video_id])
+    video.reviews.create(review_params)
+    redirect_to video
+  end
+
+  private
+
+  def review_params
+    params.require(:review).permit!
+  end
+end
