@@ -17,7 +17,7 @@ describe VideosController do
         review1 = Fabricate(:review, video: video)
         review2 = Fabricate(:review, video: video)
         get :show, id: video.id
-        assigns(:reviews).should =~ [review1, review2]
+        expect(assigns(:reviews)).to include(review1, review2)
       end
     end
 
