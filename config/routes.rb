@@ -20,5 +20,4 @@ Myflix::Application.routes.draw do
 
 
 
-  get 'haml_test', to: 'pages#haml_test'
 end
