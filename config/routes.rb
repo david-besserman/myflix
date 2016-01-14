@@ -21,7 +21,7 @@ Myflix::Application.routes.draw do
 
   # queue items controller
   get '/my_queue', to: 'queue_items#index'
-  resources :queue_items, only: [:create]
+  resources :queue_items, only: [:create, :destroy]
 
   
   # other controllers
