@@ -26,7 +26,5 @@ Myflix::Application.routes.draw do
   
   # other controllers
   get 'ui(/:action)', controller: 'ui'
-  get 'haml_test', to: 'pages#haml_test' #TODO: delelte
-
   resources :categories, only: [:show]
 end
