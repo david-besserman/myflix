@@ -19,14 +19,13 @@
                 %td
                   = queue_item.position 
                 %td
-                  = link_to queue_item.video_title, queue_item.video
+                  = link_to queue_item.video_title, queue_item.video 
                 %td
                   = button_to "Play", nil, class: "btn btn-default"
                 %td
                   = queue_item.rating
                 %td
                   = link_to queue_item.category_name, queue_item.category
-                  -# isn't it better to only go for the category to hit the database only once ?
                 %td
                   = link_to queue_item, method: :delete do
                     %i.glyphicon.glyphicon-remove
