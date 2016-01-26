@@ -24,4 +24,3 @@ Video.create!(title: "futurama", small_cover_url: "/tmp/futurama.jpg", large_cov
 david = User.create(email: 'david@test.com', password: 'password', full_name: 'David B')
 
 Review.create(user: david, video: fam_guy, content: 'love that show', rating: 4)
-Review.create(user: david, video: fam_guy, content: 'hate that show', rating: 2)
