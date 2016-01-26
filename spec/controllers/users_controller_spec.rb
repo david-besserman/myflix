@@ -30,7 +30,7 @@ describe UsersController do
 
       it 'does not create the user' do
         expect(User.count).to eq(0)
-      end
+    end
 
       it 'renders the :new template' do
         expect(response).to render_template :new 

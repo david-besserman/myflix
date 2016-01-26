@@ -21,7 +21,7 @@
             %label Rate this video
             .row
               .col-sm-3
-                = f.select :rating, options_for_select(generate_options_for_selecting_stars(5)), class: "form-control"
+                = f.select :rating, options_for_selecting_rating, class: "form-control"
           .form-group
             %label Write Review
             .row
