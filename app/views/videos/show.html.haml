@@ -9,8 +9,8 @@
           %span Rating: 4.5/5.0
         %p= @video.description
         .actions
-          %a.btn.btn-primary(href="") Watch Now
-          %a.btn.btn-default(href="") + My Queue
+          -# %a.btn.btn-primary(href="") Watch Now
+          = link_to '+ My Queue', queue_items_path(video_id: @video.id), method: :post, class: 'btn btn-default'
 
 %section.reviews.container
   .row
@@ -21,7 +21,7 @@
             %label Rate this video
             .row
               .col-sm-3
-                = f.select :rating, options_for_select(generate_options_for_selecting_stars(5)), class: "form-control"
+                = f.select :rating, options_for_selecting_rating, class: "form-control"
           .form-group
             %label Write Review
             .row
