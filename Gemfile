@@ -14,21 +14,22 @@ gem 'bcrypt'
 gem 'fabrication'
 gem 'faker'
 
-group :development do
-  gem 'thin'
-  gem "better_errors"
-  gem "binding_of_caller"
-end
-
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'
 end
 
+group :development do
+  gem 'thin'
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+
 group :test do
   gem 'database_cleaner', '1.4.1'
   gem 'shoulda-matchers', '2.7.0'
+  gem 'capybara'
 end
 
 group :production do
