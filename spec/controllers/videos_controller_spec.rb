@@ -4,10 +4,13 @@ describe VideosController do
   describe 'GET show' do
     let(:video) { Fabricate(:video) }
 
+    it_behaves_like "requires sign in" do
+      let(:action) { get :show, id: video.id }
+    end
+
     context 'authenticated user' do
-      before do
-        session[:user_id] = Fabricate(:user).id
-      end
+      before { set_current_user }
+
       it 'sets @video' do
         get :show, id: video.id
         expect(assigns(:video)).to eq(video)
@@ -20,30 +23,20 @@ describe VideosController do
         expect(assigns(:reviews)).to include(review1, review2)
       end
     end
-
-    context 'unauthenticated user' do
-      it 'redirects to the sign in page' do
-        get :show, id: video.id
-        expect(response).to redirect_to sign_in_path
-      end 
-    end
   end
 
   describe '#POST search' do
     let(:futurama) { Fabricate(:video, title: 'futurama' )}
 
-    context 'authenticated user' do
-      it 'sets @results' do
-        session[:user_id] = Fabricate(:user).id
-        post :search, search_term: 'rama'
-        expect(assigns(:results)).to eq([futurama])
-      end
+    it_behaves_like "requires sign in" do
+      let(:action) { post :search, search_term: 'rama' }
     end
 
-    context 'unauthenticated user' do
-      it 'redirects to the sign in page' do
+    context 'authenticated user' do
+      it 'sets @results' do
+        set_current_user
         post :search, search_term: 'rama'
-        expect(assigns(:results)).to redirect_to sign_in_path
+        expect(assigns(:results)).to eq([futurama])
       end
     end
   end
