@@ -22,5 +22,8 @@ Video.create!(title: "futurama", small_cover_url: "/tmp/futurama.jpg", large_cov
 Video.create!(title: "futurama", small_cover_url: "/tmp/futurama.jpg", large_cover_url: "/tmp/futurama.jpg", description:"Fry, a pizza guy is accidentally frozen in 1999 and thawed out New Year's Eve 2999.", category: comedies)
 
 david = User.create(email: 'david@test.com', password: 'password', full_name: 'David B')
+john = User.create(email: 'john@test.com', password: 'password', full_name: 'John McL')
 
 Review.create(user: david, video: fam_guy, content: 'love that show', rating: 4)
+
+Relationship.create(leader: john, follower: david)

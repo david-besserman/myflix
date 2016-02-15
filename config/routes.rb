@@ -28,4 +28,6 @@ Myflix::Application.routes.draw do
   # other controllers
   get 'ui(/:action)', controller: 'ui'
   resources :categories, only: [:show]
+  get 'people', to: 'relationships#index'
+  resources :relationships, only: [:destroy]
 end
