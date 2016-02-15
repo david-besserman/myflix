@@ -12,7 +12,7 @@ Myflix::Application.routes.draw do
   
   # users controller
   get '/register', to: 'users#new'
-  resources :users, only: [:create]
+  resources :users, only: [:create, :show]
   
   # sessions controller
   get 'sign_in', to: 'sessions#new'
