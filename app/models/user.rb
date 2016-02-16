@@ -25,4 +25,16 @@ class User < ActiveRecord::Base
       queue_item.update(position: (index + 1))
     end
   end
+
+  def can_follow?(leader)
+    !(already_follows?(leader)) || is?(leader)
+  end
+
+  def already_follows?(another_user)
+    !!Relationship.find_by(leader: another_user, follower: self)
+  end
+
+  def is?(user)
+    self == user
+  end
 end

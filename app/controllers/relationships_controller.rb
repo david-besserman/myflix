@@ -1,8 +1,14 @@
 class RelationshipsController < ApplicationController
-  before_action :require_user, only: [:index, :destroy]
+  before_action :require_user, only: [:index, :create, :destroy]
 
   def index
     @relationships = current_user.following_relationships
+  end
+
+  def create
+    leader = User.find(params[:leader_id])
+    Relationship.create(leader_id: params[:leader_id], follower_id: current_user.id) if current_user.can_follow?(leader)
+    redirect_to people_path
   end
 
   def destroy
