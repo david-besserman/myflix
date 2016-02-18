@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   has_secure_password validations: false
   has_many :queue_items, -> {order("position")}
+  has_many :reviews, -> {order("created_at DESC")}
+  has_many :following_relationships, class_name: 'Relationship', foreign_key: :follower_id
+  # should return all the relationships where the user is the follower
 
   validates_presence_of :email, :password, :full_name
   validates_uniqueness_of :email
@@ -21,5 +24,17 @@ class User < ActiveRecord::Base
     queue_items.each_with_index do |queue_item, index|
       queue_item.update(position: (index + 1))
     end
+  end
+
+  def can_follow?(leader)
+    !(already_follows?(leader)) || is?(leader)
+  end
+
+  def already_follows?(another_user)
+    !!Relationship.find_by(leader: another_user, follower: self)
+  end
+
+  def is?(user)
+    self == user
   end
 end

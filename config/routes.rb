@@ -12,7 +12,7 @@ Myflix::Application.routes.draw do
   
   # users controller
   get '/register', to: 'users#new'
-  resources :users, only: [:create]
+  resources :users, only: [:create, :show]
   
   # sessions controller
   get 'sign_in', to: 'sessions#new'
@@ -28,4 +28,6 @@ Myflix::Application.routes.draw do
   # other controllers
   get 'ui(/:action)', controller: 'ui'
   resources :categories, only: [:show]
+  get 'people', to: 'relationships#index'
+  resources :relationships, only: [:create, :destroy]
 end
