@@ -40,7 +40,7 @@ feature "User interacts with the queue" do
   end
   def add_video_to_queue(video)
     visit home_path
-    click_on_video_on_home_page(video)
+    click_on_video_link(video)
     click_link "+ My Queue"
   end
 
