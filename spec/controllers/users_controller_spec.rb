@@ -21,6 +21,28 @@ describe UsersController do
       it 'redirects to the sign_in page' do
         expect(response).to redirect_to sign_in_path 
       end
+
+      describe 'email sending' do
+        after { ActionMailer::Base.deliveries.clear }
+
+        it 'sends an email' do
+          expect(ActionMailer::Base.deliveries).not_to be_empty
+        end
+
+        it 'is sent to the right adress' do
+          user = User.first
+          email = ActionMailer::Base.deliveries.last
+          expect(email.to).to eq([user.email])
+        end
+
+        it 'is sent with the right content' do
+          user = User.first
+          email = ActionMailer::Base.deliveries.last
+          expected_message = "Welcome to Myflix #{user.full_name} !"
+          expect(email.body).to  include(expected_message)
+        end
+        # there is another test relative to email sending in the 'with invalid input' context called "doesn't send a welcome email"
+      end
     end
 
     context 'with invalid input' do
@@ -38,6 +60,11 @@ describe UsersController do
 
       it 'sets @user' do
         expect(assigns(:user)).to be_instance_of(User)
+      end
+      
+      it "doesn't send a welcome email" do
+        user = User.first
+        expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
   end
