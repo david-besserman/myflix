@@ -1,12 +1,14 @@
 class User < ActiveRecord::Base
+  validates_presence_of :email, :password, :full_name
+  validates_uniqueness_of :email
+
   has_secure_password validations: false
   has_many :queue_items, -> {order("position")}
   has_many :reviews, -> {order("created_at DESC")}
   has_many :following_relationships, class_name: 'Relationship', foreign_key: :follower_id
   # should return all the relationships where the user is the follower
 
-  validates_presence_of :email, :password, :full_name
-  validates_uniqueness_of :email
+  before_create :generate_token
 
   def new_queue_item_position
     queue_items.count + 1
@@ -37,4 +39,9 @@ class User < ActiveRecord::Base
   def is?(user)
     self == user
   end
+
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
+  end
+
 end

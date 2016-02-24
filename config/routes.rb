@@ -24,6 +24,15 @@ Myflix::Application.routes.draw do
   post '/update_queue', to: 'queue_items#update_queue'
   resources :queue_items, only: [:create, :destroy]
 
+  # forgot_password controller
+  get '/forgot_password', to: 'forgot_passwords#new'
+  get '/forgot_password_confirmation', to: 'forgot_passwords#confirm'
+  resources :forgot_passwords, only: [:create]
+
+  # password_resets controller
+  resources :password_resets, only: [:show, :create]
+  get 'expired_token', to: 'password_resets#expired_token'
+
   
   # other controllers
   get 'ui(/:action)', controller: 'ui'
