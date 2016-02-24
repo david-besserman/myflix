@@ -31,15 +31,15 @@ describe UsersController do
 
         it 'is sent to the right adress' do
           user = User.first
-          email = ActionMailer::Base.deliveries.last
-          expect(email.to).to eq([user.email])
+          sent_email = ActionMailer::Base.deliveries.last
+          expect(sent_email.to).to eq([user.email])
         end
 
         it 'is sent with the right content' do
           user = User.first
-          email = ActionMailer::Base.deliveries.last
+          sent_email = ActionMailer::Base.deliveries.last
           expected_message = "Welcome to Myflix #{user.full_name} !"
-          expect(email.body).to  include(expected_message)
+          expect(sent_email.body).to  include(expected_message)
         end
         # there is another test relative to email sending in the 'with invalid input' context called "doesn't send a welcome email"
       end
